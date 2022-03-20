@@ -1,0 +1,22 @@
+Today’s challenge is to split a bill, including tip, between friends. 
+
+total = input("Welcome to the tip calculator. What was the total bill? $")
+number_of_people = input("How many people to split the bill? ")
+tip_percent = input("What percentage would you like to tip? ")
+#get our inputs
+total_as_num= float(total)
+num_people_as_num = int(number_of_people)
+#convert type
+tip_on_100 = int(tip_percent)/100+1
+#get the tip total
+total_per_person = (total_as_num/num_people_as_num)*tip_on_100
+what_to_pay= round(total_per_person,2)
+print(f"Each person should pay: ${what_to_pay}.")
+
+->
+
+Welcome to the tip calculator. What was the total bill? $150.5
+How many people to split the bill? 4
+What percentage would you like to tip? 20
+Each person should pay $45.15.
+
