@@ -1,0 +1,75 @@
+Functions used:
+ASCII art
+Import
+Import random/choosing random integer
+Building and selecting from lists
+Converting input to integer
+if/else with multiple conditions using and
+ 
+rock = '''
+    _______
+---'   ____)
+      (_____)
+      (_____)
+      (____)
+---.__(___)
+'''
+ 
+paper = '''
+    _______
+---'   ____)____
+          ______)
+          _______)
+         _______)
+---.__________)
+'''
+ 
+scissors = '''
+    _______
+---'   ____)____
+          ______)
+       __________)
+      (____)
+---.__(___)
+'''
+ 
+#Write your code below this line 👇
+import random
+print("Welcome to Rock, Paper, Scissors! You are playing against the computer.\n Rock= 1, Paper = 2, and Scissors = 3")
+user_choice = int(input("Which one do you choose? "))
+computer_choice_options = ["1","2","3"]
+number = random.randint(0,2) 
+computer_choice = int(computer_choice_options[number]) 
+if user_choice == 1:
+  print("You chose rock"+rock)
+elif user_choice == 2:
+  print("You chose paper"+ paper)
+elif user_choice == 3:
+  print("You chose scissors"+scissors)
+if computer_choice == 1:
+  print("The computer chose rock"+rock)
+elif computer_choice == 2:
+  print("The computer chose paper"+ paper)
+elif computer_choice == 3:
+  print("The computer chose scissors"+scissors)
+if user_choice == 1 and computer_choice == 1:
+  print("You tied.")
+if user_choice == 1 and computer_choice == 2:
+  print("You lost.")
+if user_choice == 1 and computer_choice == 3:
+  print("You won.")
+if user_choice == 2 and computer_choice == 1:
+  print("You lost.")
+if user_choice == 2 and computer_choice == 2:
+  print("You tied.")
+if user_choice == 2 and computer_choice == 3:
+  print("You won.")
+if user_choice == 3 and computer_choice == 1:
+  print("You lost.")
+if user_choice == 3 and computer_choice == 2:
+  print("You won.")
+if user_choice == 3 and computer_choice == 3:
+  print("You tied.")
+else: 
+  print("You did not select a choice correctly.")
+# I have protected the game against someone typing a number that is out of range.
