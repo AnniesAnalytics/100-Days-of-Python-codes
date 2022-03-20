@@ -1,3 +1,4 @@
+Use my tip calculator: https://replit.com/@AnniesAnalytics/tip-calculator 
 Today’s challenge is to split a bill, including tip, between friends. 
 
 total = input("Welcome to the tip calculator. What was the total bill? $")
