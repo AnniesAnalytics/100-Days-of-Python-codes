@@ -1,0 +1,65 @@
+Try my hangman game! https://replit.com/@AnniesAnalytics/Annies-Hangman-Challenge?v=1
+
+Skills used:
+Import random
+Import other module and use its variables
+Setting variables = T/F to control while loops
+For loops
+if/else 
+Calling positions in word lists
+Joining within a print statement
+Lowering the input in the same line as asking for the input
+Keeping score using += / -=
+Setting multiple ends to codes
+ 
+#begin
+import random
+import hangman_art
+import hangman_words
+# importing random and other modules
+chosen_word = random.choice(hangman_words.word_list)
+#using a variable from another module
+word_length = len(chosen_word)
+ 
+end_of_game = False
+lives = 6
+print(hangman_art.logo)
+#importing the logo from another module
+ 
+#Testing code
+#print(f'Pssst, the solution is {chosen_word}.')
+ 
+display = []
+for _ in range(word_length):
+    display += "_"
+#creating blanks for the display word as a list
+ 
+while not end_of_game:
+    guess = input("Guess a letter: ").lower()
+#This keeps us looping until they have guessed all words or exhausted guesses
+ 
+    for position in range(word_length):
+        letter = chosen_word[position]
+        if letter == guess:
+            display[position] = letter
+#This checks for CORRECT letters be using the for loop
+ 
+    if guess not in chosen_word:
+        lives -= 1
+        if lives == 0:
+            end_of_game = True
+           
+#This operates outside of the for loop so that it only operates once if their guess is incorrect.
+    print(hangman_art.stages[lives])
+#This prints the art for the lives left.
+    print(f"{' '.join(display)}")
+# Turns our display list into a string- using "join" within a print statement
+ 
+    if "_" not in display:
+        end_of_game = True
+        print("You win.")
+    if lives == 0:
+      print("You lose.")
+#This checks to see if they have won which is on the same level as checking if they lost.
+ 
+
