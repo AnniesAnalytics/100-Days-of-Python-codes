@@ -1,0 +1,48 @@
+Try my cipher!  https://replit.com/@AnniesAnalytics/Annies-cipher?v=1 
+
+Learned/used:
+Calling a variable within defining and calling a function
+Doing math with multiple inputs into a fxn
+Dividing and then rounding up each time
+Cycling through a list and accounting for the number being added to the position being out of range
+Skipping over indexing list items that are not in the list and adding the original to the new string
+Defining a function
+For loop
+While loop
+Calling for variables repeatedly (new ones each time) within a while loop (allowing the user to repeat a program until they finish)
+ 
+import art
+#import another module where I got the art from
+print(art.logo)
+alphabet = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z', 'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z']
+#added the alphabet twice to eliminate shift errors.
+ 
+def caesar(start_text, shift_amount, cipher_direction):
+  end_text = ""
+  #new blank word to input the new string into
+  if cipher_direction == "decode":
+    shift_amount *= -1
+    # append does not work in this case because it is not a list so it needs to be just adding to the string.
+  for char in start_text:
+    try:
+      position = alphabet.index(char)
+      new_position = position + shift_amount
+      end_text += alphabet[new_position]
+    except ValueError:
+      end_text += char
+      #This accounts for the error you would get with spaces symbols and numbers because it skips anything not in the alphabet list and just adds "char" which is the characer the for loop is pulling that round.
+  print(f"Here's the {cipher_direction}d result: {end_text}")
+# I tried exiting the for loop from here by setting an if = true with the program over variable but it did not execute.
+ 
+program_over = False
+ 
+while program_over == False:
+  direction = input("Type 'encode' to encrypt, type 'decode' to decrypt:\n")
+  text = input("Type your message:\n").lower()
+  shift_large = int(input("Type the shift number:\n"))
+  shift = shift_large % 26
+  caesar(start_text=text, shift_amount=shift, cipher_direction=direction)
+  try_again = input("Would you like to try again? Yes or no\n").lower()
+  if try_again == "no":
+    program_over = True
+    print("Goodbye.")
