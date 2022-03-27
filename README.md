@@ -1,5 +1,8 @@
 # 100-Days-of-Python-codes
 Test out my games/apps!
+## Annie's Cipher
+https://replit.com/@AnniesAnalytics/Annies-cipher?v=1 
+
 ## 7 Hangman
 https://replit.com/@AnniesAnalytics/Annies-Hangman-Challenge?v=1
 
