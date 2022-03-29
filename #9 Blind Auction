@@ -1,5 +1,16 @@
 Try my auction! : https://replit.com/@AnniesAnalytics/Annies-Blind-Auction?v=1
 
+
+Skills used/learned:
+-Creating a dictionary
+-adding to a dictionary using a while function/loop
+-using a T/F variable to continue and exit a while loop
+-clearing the console
+-using a for loop to search for the highest value in a dictionary
+-using a for loop to index the highest value, and key attached to it (separately) within a dictionary
+
+
+#start
 from replit import clear
 from art import logo
 print(logo)
