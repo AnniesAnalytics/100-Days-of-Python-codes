@@ -6,6 +6,7 @@ Skills used:
 -Defining a dictionary
 -Calling dictionary items to use within a defined function
 -Using the return of functions to use it within code
+-recursion - calling a function within defining it
 
 from replit import clear
 from art import logo
