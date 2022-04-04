@@ -1,0 +1,103 @@
+Try my game! https://replit.com/@AnniesAnalytics/Annies-blackjack?v=1
+
+Skills used:
+- if/else statements within while loops
+-defining functions
+-creating and adding to lists (append)
+-finding the sum of a list
+-using the sum of a list to determine outcomes
+-using emojis in code
+-importing/using random
+-commenting code for later reference
+-indexing a list and replacing that object
+############### Blackjack Project #####################
+
+
+############### Our Blackjack House Rules #####################
+
+## The deck is unlimited in size. 
+## There are no jokers. 
+## The Jack/Queen/King all count as 10.
+## The the Ace can count as 11 or 1.
+## Use the following list as the deck of cards:
+cards = [11, 2, 3, 4, 5, 6, 7, 8, 9, 10, 10, 10, 10]
+## The cards in the list have equal probability of being drawn.
+## Cards are not removed from the deck as they are drawn.
+## The computer is the dealer.
+import random
+import art
+print(art.logo)
+print("Welcome to Blackjack. Are you ready to play?")
+play = input("Type yes or no. ").lower()
+while play == "yes":
+  print("Welcome.")
+  dealer = []
+  user = []
+  user_score = 0
+  dealer_score = 0
+  def add_dealer():
+    dealer_choice = random.choice(cards)
+   # print(f"dealer{dealer_choice}")
+    dealer.append(dealer_choice)
+  #add to dealers hand
+  def add_user():
+    user_choice = random.choice(cards)
+    user.append(user_choice)
+  #add to users hand
+  user_cards = 0
+  dealer_cards = 0
+  while user_cards <2:
+    add_user()
+    add_dealer()
+    user_cards+=1
+    dealer_cards+=1
+  #we now have our starting hand
+  if 11 in user:
+    user_alternate = (sum(user)-10)
+  if 11 in user:
+    print(f"Your hand is: {user}, and your current score is {sum(user)} or {user_alternate}.")
+  else:
+    print(f"Your hand is: {user}, and your current score is {sum(user)}.")
+#this if statement accounts for the fact that the ace could be a 1 or 11.
+  print(f"The computer's first card is: {dealer[1]}")
+#using the sum function to get the sum of the list of the users cards. The initial list had to be made as numbers not char (with ""), for this to work
+  user_add = "yes"
+  while user_add == "yes":
+    user_add = input("Would you like to chose another card? yes or no. ").lower()
+    if user_add == "yes":
+      add_user()
+      if 11 in user:
+        user_alternate = (sum(user)-10)
+      if 11 in user:
+        print(f"Your hand is: {user}, and your current score is {sum(user)} or {user_alternate}.")
+      else:
+        print(f"Your hand is: {user}, and your current score is {sum(user)}.")
+#allowing the user to add as many cards as they would like.
+  while sum(dealer) < 17:
+    add_dealer()
+#get the complete dealer's hand
+  print("The game is complete.")
+  if 11 in user:
+    while sum(user)>21:
+      i = user.index(11)
+      user[i] = 1
+  if 11 in dealer:
+    if sum(dealer)>21:
+      i = dealer.index(11)
+      dealer[i] = 1
+#this turns the ace from 11 to 1 if the score is over 21
+  print(f"Your final hand: {user}. Your score is {sum(user)}.")
+  print(f"The computer's hand is {dealer} and their score is {sum(dealer)}")
+  if sum(user) >21: 
+    print("Your score is over 21, you lose.")
+  elif sum(dealer) >21:
+    print("The computer's score is over 21, you win!")
+  else:
+    if sum(user)>sum(dealer):
+      print("You win! \U0001F601") 
+#added emoji
+    else: 
+      print("You lose. \N{unamused face}")
+#finish game
+  play = input("Would you like to play again? Yes or no. ").lower()
+print("Goodbye.")
