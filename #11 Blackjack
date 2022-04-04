@@ -36,11 +36,13 @@ while play == "yes":
   user_score = 0
   dealer_score = 0
   def add_dealer():
+    """adds a card to the dealers hand"""
     dealer_choice = random.choice(cards)
    # print(f"dealer{dealer_choice}")
     dealer.append(dealer_choice)
   #add to dealers hand
   def add_user():
+    """adds a card to the users hand"""
     user_choice = random.choice(cards)
     user.append(user_choice)
   #add to users hand
