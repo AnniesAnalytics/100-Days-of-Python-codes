@@ -1,0 +1,60 @@
+Try my game! https://replit.com/@AnniesAnalytics/Annies-Higher-or-Lower-Follower-Count-Game?v=1
+
+from game_data import data
+from art import logo, vs
+from replit import clear
+import random
+
+def get_person():
+  """uses the random function to input a random dictionary entry (account) into the function"""
+  person = random.choice(data)
+  return person
+#get person
+
+def details(person):
+  """Gets the account's details to print when asking the user to compare them"""
+  a_name = person["name"]
+  a_description = person["description"]
+  a_country = person["country"]
+  return f"{a_name}, a {a_description} from {a_country} "
+#format data (Account) - to get details like name and description for comparing later
+
+def check_answer(guess, a_followers, b_followers):
+  """Takes the higher follower count and compares it against the user guess to return T/F value (T if they're right, F if they're not)."""
+  if a_followers > b_followers:
+    return guess == "a"
+  else:
+    return guess == "b"
+#What this function does: It looks to see who has the higher follower count, and then it returns that account as the answer. But it does it in a sneaky way. It does it in a return statement, so it uses the existing variable "guess" to set the correct answer as ==. So- if guess is = the correct answer, the entire function will evaluate as True. It WONT return "guess == b". It is returning the statement guess == a/b but without quotes around it so the code looks at it as either True, or False. This allows you to use this T/F statement later on.
+
+def game():
+  """This brings the user through the entire gameflow, calling other functions and utilizing for loops"""
+  score = 0
+  print("Welcome to the higher or lower game. In this, you are going to try to guess which Instagram account has a higher follower number- A or B.")
+  game_continue = True
+#game fxn (start)
+  while game_continue:
+    person_a = get_person()
+    person_b = get_person()
+    while person_a == person_b:
+      person_b = get_person
+  #while loops to put accounts into variables (2)
+    print(f"Compare account A: {details(person_a)}")
+    print(f"With the Account : {details(person_b)}")
+    guess = input("Which account has more followers? Type A or B.\n").lower()
+    a_followers = person_a["follower_count"]
+    b_followers = person_b["follower_count"]
+    is_correct = check_answer(guess,a_followers,b_followers)
+  #print comparisons, take guess, is_correct = check answer
+    clear()
+    print(logo)
+    if is_correct:
+      print("You're right!")
+      score += 1
+      print(f"Your score is {score}")
+    else:
+      print(f"Sorry, that is wrong. Your final score is {score}")
+      game_continue = False
+  #clear, print logo, print score if contining and increasse score, print final score and end game if wrong. 
+
+game()
