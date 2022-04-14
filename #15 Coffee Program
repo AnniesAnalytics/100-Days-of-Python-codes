@@ -1,0 +1,234 @@
+MENU = {
+    "espresso": {
+        "ingredients": {
+            "water": 50,
+            "coffee": 18,
+        },
+        "cost": 1.5,
+    },
+    "latte": {
+        "ingredients": {
+            "water": 200,
+            "milk": 150,
+            "coffee": 24,
+        },
+        "cost": 2.5,
+    },
+    "cappuccino": {
+        "ingredients": {
+            "water": 250,
+            "milk": 100,
+            "coffee": 24,
+        },
+        "cost": 3.0,
+    }
+}
+
+resources = {
+    "water": 300,
+    "milk": 200,
+    "coffee": 100,
+}
+# add = MENU["espresso"]["ingredients"]["water"]
+# print(add)
+QUARTER = .25
+NICKEL = .1
+DIME = .05
+PENNY = .01
+machine_empty = False
+
+
+def enough(drink):
+    """evaluates if the machine has enough resources to make a drink"""
+    ok = True
+    for item in MENU[drink]["ingredients"]:
+        level_needed = MENU[drink]["ingredients"][item]
+        actual_level = resources[item]
+        print(f"{level_needed}n, a{actual_level}")
+        if level_needed <= actual_level:
+            ok = True
+        else:
+            ok = False
+            break
+    if ok:
+        return True
+    if not ok:
+        return False
+    # This is because the code below kept evaluating to be false
+    # every time, and I think it had to do with not being able to store the results of the for loop
+    # so, I created ok, so it could update to being false if needed
+    #     return level_needed > actual_level
+    # elif level_needed == actual_level:
+    #     return level_needed == actual_level
+    # else:
+    #     return level_needed >= actual_level
+    # d_water = MENU[drink]["ingredients"]["water"]
+    # d_milk = MENU[drink]["ingredients"]["milk"]
+    # d_coffee = MENU[drink]["ingredients"]["coffee"]
+    # r_water = resources["water"]
+    # r_milk = resources["milk"]
+    # r_coffee = resources["coffee"]
+    # print("hello i am enough")
+    # if r_water >= d_water and r_milk >= d_milk and r_coffee >= d_coffee:
+    #     return r_water>= d_water
+    # else:
+    #     return r_water == 1000
+
+
+def take_coins(drink):
+    """Takes coins from the user and evaluates T or F based on if they give enough"""
+    cost = MENU[drink]["cost"]
+    quarters = float(input("How many quarters would you like to enter? "))
+    dimes = float(input("How many dimes would you like to enter? "))
+    nickels = float(input("How many nickels would you like to enter? "))
+    pennies = float(input("How many pennies would you like to enter? "))
+    quarter_total = float(QUARTER * quarters)
+    dimes_total = float(DIME * dimes)
+    nickels_total = float(NICKEL * nickels)
+    pennies_total = float(PENNY * pennies)
+    user_total = float(quarter_total + nickels_total + dimes_total + pennies_total)
+    print(f"I am take coins. The user gave {user_total} which was {quarter_total} + {dimes_total} + {nickels_total} + "
+          f"{pennies_total}")
+    print(f"user total {user_total}, cost {cost}")
+    if user_total >= cost:
+        change = float(user_total - cost)
+        print(f"You gave us ${user_total}, and the cost was ${cost}. Your change is ${change}")
+        return user_total >= cost
+    # elif user_total == cost:
+    #     return user_total == cost
+    else:
+        return user_total > cost
+
+
+def subtract_resources(drink):
+    """Subtracts the resources from the machine that this drink cost"""
+    # print(f"item{item}")
+    # print(f"{MENU[drink]['ingredients'][item]}, {MENU[drink]['ingredients']}")
+    # if MENU[drink]["ingredients"][item] not in MENU[drink]["ingredients"]:
+    #     print("not in drink")
+    #     level_needed = 0
+    #     actual_level = 1
+    # else:
+    for item in MENU[drink]["ingredients"]:
+        level_needed = MENU[drink]["ingredients"][item]
+        print(f"{level_needed}n")
+        resources[item] -= level_needed
+        print("hello i am subtract resources")
+    # d_water = MENU[drink]["ingredients"]["water"]
+    # d_milk = MENU[drink]["ingredients"]["milk"]
+    # d_coffee = MENU[drink]["ingredients"]["coffee"]
+    # resources["water"] = d_water
+    # resources["milk"] = d_milk
+    # resources["coffee"] = d_coffee
+    # print("hello I am subtract resources")
+
+
+espresso_cost = MENU["espresso"]["cost"]
+latte_cost = MENU["latte"]["cost"]
+cappuccino_cost = MENU["cappuccino"]["cost"]
+
+
+while not machine_empty:
+    order = input("What would you like? (espresso/latte/cappuccino): ").lower()
+    if order == "espresso" or order == "latte" or order == "cappuccino":
+        if enough(order):
+            if order == "cappuccino":
+                drink_cost = cappuccino_cost
+            elif order == "latte":
+                drink_cost = latte_cost
+            else:
+                drink_cost = espresso_cost
+            print(f"That will be ${drink_cost}")
+
+            if take_coins(order):
+                subtract_resources(order)
+                print(f"Here is your {order}, enjoy!")
+            else:
+                print("Sorry, you do not have enough funds.")
+
+            cappuccino = "cappuccino"
+            latte = "latte"
+            espresso = "espresso"
+            if not enough(cappuccino) and not enough(latte) and not enough(espresso):
+                machine_empty = True
+                print(f"Here is your {order}, enjoy!")
+                print("Machine exhausted.")
+
+        else:
+            print("Sorry, we do not have enough resources for that. Make another selection.")
+    elif order == "off":
+        machine_empty = True
+    elif order == "report":
+        print(resources)
+        keep_going = input("Would you like to continue ordering? Y or n. ").lower()
+        if keep_going == "y":
+            print("ok")
+        else:
+            machine_empty = True
+    else:
+        print("Sorry, you have selected an invalid option.")
+
+# prompt what would you like?
+
+# TODO: 1 Prompt user by asking “What would you like? (espresso/latte/cappuccino):”
+# a. Check the user’s input to decide what to do next.
+# b. The prompt should show every time action has completed, e.g. once the drink is
+# dispensed. The prompt should show again to serve the next customer.
+
+# TODO: 2 Turn off the Coffee Machine by entering “off” to the prompt.
+# a. For maintainers of the coffee machine, they can use “off” as the secret word to turn off
+# the machine. Your code should end execution when this happens.
+
+# TODO: 3 Print report.
+# a. When the user enters “report” to the prompt, a report should be generated that shows
+# the current resource values. e.g.
+# Water: 100ml
+# Milk: 50ml
+# Coffee: 76g
+# Money: $2.5
+
+# TODO: 4 Check resources sufficient?
+# a. When the user chooses a drink, the program should check if there are enough
+# resources to make that drink.
+# b. E.g. if Latte requires 200ml water but there is only 100ml left in the machine. It should
+# not continue to make the drink but print: “Sorry there is not enough water.”
+# c. The same should happen if another resource is depleted, e.g. milk or coffee.
+
+# TODO: 5 Process coins.
+# a. If there are sufficient resources to make the drink selected, then the program should
+# prompt the user to insert coins.
+# b. Remember that quarters = $0.25, dimes = $0.10, nickles = $0.05, pennies = $0.01
+# c. Calculate the monetary value of the coins inserted. E.g. 1 quarter, 2 dimes, 1 nickel, 2
+# pennies = 0.25 + 0.1 x 2 + 0.05 + 0.01 x 2 = $0.52
+
+# TODO: 6 Check transaction successful?
+# a. Check that the user has inserted enough money to purchase the drink they selected.
+# E.g Latte cost $2.50, but they only inserted $0.52 then after counting the coins the
+# program should say “Sorry that's not enough money. Money refunded.”.
+# b. But if the user has inserted enough money, then the cost of the drink gets added to the
+# machine as the profit and this will be reflected the next time “report” is triggered. E.g.
+# Water: 100ml
+# Milk: 50ml
+# Coffee: 76g
+# Money: $2.5
+# c. If the user has inserted too much money, the machine should offer change.
+#
+# E.g. “Here is $2.45 dollars in change.” The change should be rounded to 2 decimal
+# places.
+
+# TODO: 7 Make Coffee.
+# a. If the transaction is successful and there are enough resources to make the drink the
+# user selected, then the ingredients to make the drink should be deducted from the
+# coffee machine resources.
+# E.g. report before purchasing latte:
+# Water: 300ml
+# Milk: 200ml
+# Coffee: 100g
+# Money: $0
+# Report after purchasing latte:
+# Water: 100ml
+# Milk: 50ml
+# Coffee: 76g
+# Money: $2.5
+# b. Once all resources have been deducted, tell the user “Here is your latte. Enjoy!”. If
+# latte was their choice of drink.
