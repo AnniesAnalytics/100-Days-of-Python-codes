@@ -1,0 +1,18 @@
+Try it yourself:
+Find and click the green "Run" button with a play symbol on it and it will start the program. https://replit.com/@AnniesAnalytics/band-name-generator-start#main.py 
+
+code:
+
+print("Welcome to the Band Name Generator.")
+city = input("What's the name of the city you grew up in?\n")
+pet = input("What's your pet's name?\n")
+print("Your band name could be "+ city + " " + pet)
+
+->
+
+Welcome to the Band Name Generator.
+What’s the name of the city you grew up in?
+Seattle
+What’s your pet’s name?
+Marco
+Your band name could be Seattle Marco
