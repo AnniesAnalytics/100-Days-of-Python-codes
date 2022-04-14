@@ -10,7 +10,7 @@ print("Your band name could be "+ city + " " + pet)
 
 Welcome to the Band Name Generator.
 What’s the name of the city you grew up in?
-Clifton
+Seattle
 What’s your pet’s name?
-Zailey
-Your band name could be Clifton Zailey
+Marco
+Your band name could be Seattle Marco
