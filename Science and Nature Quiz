@@ -1,0 +1,112 @@
+Try the quiz: https://replit.com/@AnniesAnalytics/Science-and-Nature-Quiz?v=1
+
+<code>
+
+FILE: main.py
+
+from question_model import Question
+from data import question_data
+from quiz_brain import QuizBrain
+
+question_bank = []
+for question in question_data:
+    question_text = question["question"]
+    question_answer = question["correct_answer"]
+    new_question = Question(question_text, question_answer)
+    # this makes a new object in the
+    question_bank.append(new_question)
+
+quiz = QuizBrain(question_bank)
+
+while quiz.still_has_questions():
+    # notice the crucial quiz.st - the quiz has to come first!
+    quiz.next_question()
+print("You've completed the quiz!")
+print(f"Your final score is {quiz.score}/{quiz.question_number}")
+
+
+FILE: data.py
+
+question_data = [
+    {"category": "Science & Nature", "type": "boolean", "difficulty": "easy",
+     "question": "Igneous rocks are formed by excessive heat and pressure.", "correct_answer": "False",
+     "incorrect_answers": ["True"]},
+    {"category": "Science & Nature", "type": "boolean", "difficulty": "easy",
+     "question": "Salt is 100% composed of Sodium.", "correct_answer": "False",
+     "incorrect_answers": ["True"]},
+    {"category": "Science & Nature", "type": "boolean", "difficulty": "easy",
+     "question": "An atom contains a nucleus.", "correct_answer": "True", "incorrect_answers": ["False"]},
+    {"category": "Science & Nature", "type": "boolean", "difficulty": "easy",
+     "question": "An exothermic reaction is a chemical reaction that releases energy by radiating electricity.",
+     "correct_answer": "False", "incorrect_answers": ["True"]},
+    {"category": "Science & Nature", "type": "boolean", "difficulty": "easy",
+     "question": "An Astronomical Unit is the distance between Earth and the Moon.",
+     "correct_answer": "False", "incorrect_answers": ["True"]},
+    {"category": "Science & Nature", "type": "boolean", "difficulty": "easy",
+     "question": "An average human can go two weeks without water.", "correct_answer": "False",
+     "incorrect_answers": ["True"]},
+    {"category": "Science & Nature", "type": "boolean", "difficulty": "easy",
+     "question": "Celiac Disease is a disease that effects the heart, causing those effected to be unable to eat meat.",
+     "correct_answer": "False", "incorrect_answers": ["True"]},
+    {"category": "Science & Nature", "type": "boolean", "difficulty": "easy",
+     "question": "Psychology is the science of behavior and mind.", "correct_answer": "True",
+     "incorrect_answers": ["False"]},
+    {"category": "Science & Nature", "type": "boolean", "difficulty": "easy",
+     "question": "Water always boils at 100&deg;C, 212&deg;F, 373.15K, no matter where you are.",
+     "correct_answer": "False", "incorrect_answers": ["True"]},
+    {"category": "Science & Nature", "type": "boolean", "difficulty": "easy",
+     "question": "A plant that has a life cycle for more than a year is known as an annual.",
+     "correct_answer": "False", "incorrect_answers": ["True"]
+     }
+]
+
+
+
+FILE: question_model.py
+
+class Question:
+    # now we have a class
+    def __init__(self, text, answer):
+        self.text = text
+        self.answer = answer
+        # This sets up attributes
+
+# new_q = Question("horses", "False")
+# # # This makes a new object within the Question class.
+#
+#
+# print(new_q.text)
+# # # This calls just the text attribute of the Question class
+
+
+FILE: quiz_brain.py
+
+class QuizBrain:
+
+    def __init__(self, q_list):
+        self.question_number = 0
+        self.score = 0
+        self.question_list = q_list
+
+    def still_has_questions(self):
+        return self.question_number < len(self.question_list)
+
+    def next_question(self):
+        current_question = self.question_list[self.question_number]
+        self.question_number += 1
+        print(f"Q.{self.question_number} {current_question.text}")
+        choice = input("True or False? ").lower()
+        self.check_answer(choice, current_question.answer)
+        # It seems you can call an answer in much the same way that you would use current_question("answer")
+
+    def check_answer(self, user_answer, correct_answer):
+        if user_answer.lower() == correct_answer.lower():
+            print("You got it right!")
+            self.score += 1
+        else:
+            print("Sorry, that is wrong.")
+        print(f"The correct answer was {correct_answer}.")
+        print(f"The current score is {self.score}/{self.question_number}")
+        print("\n")
+
+
