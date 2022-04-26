@@ -1,6 +1,13 @@
 # 100-Days-of-Python-codes
 Test out my games/apps!
 # Intermediate Projects
+
+## 17 Science and Nature Quiz
+[Click here](https://replit.com/@AnniesAnalytics/Science-and-Nature-Quiz?v=1)
+
+## 16 OOP Coffee Machine
+
+
 ## 15 Coffe Machine Program
 [Click here](https://replit.com/@AnniesAnalytics/Annies-Coffee-Machine?v=1)
 # Beginner Projects
